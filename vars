@@ -1,0 +1,4 @@
+#!/bin/bash
+
+RANDOM=$(date +%N)
+RANDOM=$((RANDOM ** 2))
