@@ -1,0 +1,41 @@
+Name vit atk agi Abilities Defense Experience Gold
+Slime 3 5 15 3 1 1
+Red Slime 4 7 15 3 1 2
+Metal slime 4 10 255 Casts Sizz. 255 115 6
+Drakee 6 9 15 6 2 2
+Magidrakee 15 14 15 Casts Sizz 14 5 12
+Drakeema 20 22 32 Casts Heal and Sizz 26 11 20
+Druin 22 22 15 18 7 16
+Druinlord 35 47 240 Casts Sizz 40 20 85
+Scorpion 20 18 15 16 6 16
+Metal Scorpion 22 36 15 42 14 40
+Rogue Scorpion 35 60 127 90 26 110
+Kol 12 11 15 Casts Sizz 12 4 11
+Warlock 30 28 49 Casts Sizz and Snooze 22 14 35
+Wizard 65 80 247 Casts Sizzle and Snooze 70 50 65
+Droll 25 24 14 24 10 25
+Drollmagi 38 52 34 Casts Heal, Sizz, and Fizzle 50 22 90
+Ghost 7 11 15 8 3 4
+Poltergeist 23 18 20 Casts Sizz 15 7 18
+Specter 36 40 49 Casts Sizzle and Snooze 38 18 70
+Wyvern 42 56 79 48 24 100
+Magiwyvern 58 78 32 Casts Snooze and breathes fiery breath. 68 34 140
+Starwyvern 65 86 128 Casts Midheal and breathes fiery breath. 80 43 160
+Wolf 34 40 31 30 16 45
+Wolflord 38 50 71 Casts Fizzle 36 20 80
+Werewolf 60 86 127 70 40 155
+Knight 55 76 103 Casts Fizzle 78 33 150
+Lethal Armour 70 94 243 Casts Snooze and Fizzle 82 54 165
+Armored Knight 90 105 147 Casts Midheal and Sizzle 86 70 140
+Skeleton 30 28 15 22 11 30
+Wraith 36 44 112 Casts Heal 34 17 60
+Shadow Skeleton 46 68 80 Casts Heal 56 28 120
+Demon Knight 50 79 255 Casts Sizz and Snooze 64 37 150
+Goldman 50 48 223 40 6 210
+Golem (Mini Boss) 70 120 255 60 5 10
+Stoneman 160 100 47 40 65 140
+Green dragon 65 88 127 Breathes fiery breath 74 45 110
+Blue dragon 70 98 255 Breathes fiery breath 84 60 150
+Red dragon 100 120 247 Casts Snooze and breathes fiery breath. 90 100 140
+Dragonlord (Stage One Boss) 100 ? ? Casts Sizzle and Fizzle. ? NONE NONE
+Dragonlord (Stage Two Boss) 130 ? ? Breathes stronger fiery breath. ? NONE NONE

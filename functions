@@ -1,54 +1,31 @@
-
-
-roll () {
-
-r200=$((1 + RANDOM % 20))
-r120=$((1 + RANDOM % 12))
-r100=$((1 + RANDOM % 10))
-r60=$((1 + RANDOM % 6))
-r40=$((1 + RANDOM % 4))
-
-}
-
-
-
+#!/bin/bash
 
 d20 () {
 
-r201=$((1 + RANDOM % 20))
-r202=$((1 + RANDOM % 20))
-r203=$((1 + RANDOM % 20))
+export $1=$((1 + RANDOM % 20))
 
 }
 
 d12 () {
 
-r121=$((1 + RANDOM % 12))
-r122=$((1 + RANDOM % 12))
-r123=$((1 + RANDOM % 12))
+export $1=$((1 + RANDOM % 12))
 
 }
 
-d4 () {
+d10 () {
 
-r41=$((1 + RANDOM % 4))
-r42=$((1 + RANDOM % 4))
-r43=$((1 + RANDOM % 4))
+export $1=$((1 + RANDOM % 10))
 
 }
 
 d6 () {
 
-r61=$((1 + RANDOM % 6))
-r62=$((1 + RANDOM % 6))
-r63=$((1 + RANDOM % 6))
+export $1=$((1 + RANDOM % 6))
 	
 }
 
-d10 () {
+d4 () {
 
-r101=$((1 + RANDOM % 10))
-r102=$((1 + RANDOM % 10))
-r103=$((1 + RANDOM % 10))
+export $1=$((1 + RANDOM % 4))
 
 }

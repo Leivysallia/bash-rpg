@@ -8,6 +8,9 @@ if [[ -f mc ]]; then
    cat /dev/null > mc
 fi
 
+d20 vit_roll
+
+echo $vit_roll
 
 while [[ $vit -lt 12 ]]; do
 vit=$(( (1 + RANDOM % 20) + (1 + RANDOM % 12) + (1 + RANDOM % 10) + (1 + RANDOM % 6) + (1 + RANDOM % 4) ))
