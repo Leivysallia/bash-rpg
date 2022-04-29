@@ -99,3 +99,14 @@ while [[ $num -gt 0 ]]; do
 done
 
 }
+
+makemon () {
+
+	while read -r name base type; do
+		echo "NAME=$name" >> $name
+		echo "VIT=$(( (1 + RANDOM % $base) + (1 + RANDOM % $type) ))" >> $name
+		echo "ATK=$(( (1 + RANDOM % $base) + (1 + RANDOM % $type) ))" >> $name
+		echo "DEF=$(( (1 + RANDOM % $base) + (1 + RANDOM % $type) ))" >> $name
+		echo "EXP=$(( (1 + RANDOM % $base) + (1 + RANDOM % $type) ))" >> $name
+	done < codex
+}

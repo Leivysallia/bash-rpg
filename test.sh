@@ -2,6 +2,8 @@
 
 source dice.bash
 
-read -r roll
+##read -r roll
 
-d20 $roll
+##d20 $roll
+
+makemon
