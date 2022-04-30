@@ -1,5 +1,5 @@
-ID=Ghost
-VI=3
-AK=3
-DE=4
-XP=3
+id=goblin
+vi=4
+ak=5
+de=5
+xp=4

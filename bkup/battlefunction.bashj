@@ -1,0 +1,51 @@
+#!/bin/bash
+
+battle () {
+	
+	levelcalc
+
+export	pinit=$(( ((atk + def) / $level) + prng ))
+export	minit=$(( ((ak + de) / $level) + mrng ))
+
+	if [[ $pinit -gt $minit ]]; then
+		export init=1
+	else
+		export init=0
+	fi
+
+while [[ vit -gt 0 || vi -gt 0 ]]; do 
+
+export	patk=$(( atk + (1 + RANDOM % $level) ))
+export	pdef=$(( def + (1 + RANDOM % $level) ))
+
+export	matk=$(( ak + (1 + RANDOM % $level) ))
+export	mdef=$(( de + (1 + RANDOM % $level) ))
+
+export	pdam=$(( mdef - patk ))
+export	mdam=$(( pdef - matk ))
+
+	if [[ $pdam -le 0 ]]; then
+		export pdam=1
+	fi
+	if [[ $mdam -le 0 ]]; then
+		export mdam=1
+	fi
+
+if [[ $init -eq 1 ]]; then
+	export vi=$(( vi - pdam ))
+	echo $'$pid does $pdam damage...'
+	export vit=$(( vit - mdam ))
+	echo $'$id does $mdam damage...'
+	echo $'$pid has $vit HP remaining...'
+		else
+	export vit=$(( vit - mdam ))
+	echo $'$id does $mdam damage...'
+	echo $'$pid has $vit HP remaining...'
+	export vi=$(( vi - pdam ))
+	echo $'$pid does $pdam damage...'
+	
+fi
+
+done
+
+}

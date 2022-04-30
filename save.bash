@@ -1,0 +1,14 @@
+pid=DEBUG
+lvl=0
+xvit=9
+vit=9
+atk=11
+def=8
+exp=0
+pid=DEBUG
+lvl=0
+xvit=9
+vit=9
+atk=10
+def=11
+exp=0

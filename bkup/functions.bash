@@ -1,12 +1,5 @@
 #!/bin/bash
 
-log () {
-
-	tee -a gamelog.bash
-
-}
-
-
 
 newline () {
 
@@ -14,32 +7,11 @@ echo $'\n'
 
 }
 
-makeplayer () {
-origin=4
-base=4
-type=4
-
-pid=DEBUG
-
-##	read -r -p $'Player Name\?\n' pid
-		echo "pid=$pid" >> player.bash
-		echo "lvl=0" >> player.bash
-		echo "vit=$(( (1 + RANDOM % $origin) + (1 + RANDOM % $base) + $type ))" >> player.bash
-		echo "atk=$(( (1 + RANDOM % $origin) + (1 + RANDOM % $base) + $type ))" >> player.bash
-		echo "def=$(( (1 + RANDOM % $origin) + (1 + RANDOM % $base) + $type ))" >> player.bash
-		echo "exp=0" >> player.bash
-
-		
-		source player.bash
-		export xvit=$vit
-
-		cat player.bash |log
-
-}
-
 cleanstart () {
 
-clear
+if [[ -f player.bash ]]; then
+   cat player.bash > save.bash
+fi
 
 cat /dev/null > drawsnear.bash
 cat /dev/null > enc.bash
@@ -48,158 +20,56 @@ cat /dev/null > player.bash
 
 echo "druin 6 4 4
 scorpion 6 4 4
-droll 6 4 4" > level6.bash
+droll 6 4 4" > levelsix.bash
 
 echo "witch 10 6 6
 skeleton 10 6 6
-wolf 10 6 6" > level10.bash
+wolf 10 6 6" > levelten.bash
 
 echo "wyrm 20 12 10
 wyvern 20 12 12
-dragon 20 20 20" > level20.bash
+dragon 20 20 20" > leveltwenty.bash
 
 echo "slime 4 1 1
 goblin 4 1 1
-ghost 4 1 1" > level4.bash
+ghost 4 1 1" > levelfour.bash
 
 echo "specter 12 10 10 
 wraith 12 10 10
-knight 12 10 10" > level12.bash
-
-makeplayer
-
-if [[ -f save.bash ]]; then
-	cat save.bash > player.bash
-	source player.bash
-	cat continue.bash > gamelog.bash
-fi
-
+knight 12 10 10" > leveltwelve.bash
 
 }
 
+makeplayer () {
+	read -r -p $'Player Name\?\n' pid
+		echo "pid=$pid" >> player.bash
+		echo "lvl=0" >> player.bash
+		echo "vit=$(( (1 + RANDOM % 6) + (1 + RANDOM % 4) ))" >> player.bash
+		echo "xvit=$vit"
+		echo "atk=$(( (1 + RANDOM % 6) + (1 + RANDOM % 4) ))" >> player.bash
+		echo "def=$(( (1 + RANDOM % 6) + (1 + RANDOM % 4) ))" >> player.bash
+		echo "exp=0" >> player.bash
+
+		source player.bash
+}
 
 levelcalc () {
 
 	if [[ $lvl -le 20 ]]; then
-		level=20
-		d20 prng
-		d20 mrng
+		level=twenty
 	fi
 	if [[ $lvl -le 12 ]]; then
-		level=12
-		d12 prng
-		d12 mrng
+		level=twelve
 	fi
 	if [[ $lvl -le 10 ]]; then
-		level=10
-		d10 mrng
-		d10 prng
+		level=ten
 	fi
 	if [[ $lvl -le 6 ]]; then
-		level=6
-		d6 prng
-		d6 mrng
+		level=six
 	fi
 	if [[ $lvl -le 4 ]]; then
-		level=4
-		d4 prng
-		d4 mrng
+		level=four
 	fi
-
-}
-
-damagecalc () {
-
-levelcalc
-
-export	patk=$(( atk + (1 + RANDOM % $level) ))
-export	pdef=$(( def + (1 + RANDOM % $level) ))
-export	matk=$(( ak + (1 + RANDOM % $level) ))
-export	mdef=$(( de + (1 + RANDOM % $level) ))
-export	pdam=$(( patk - mdef ))
-export	mdam=$(( matk - pdef ))
-
-	if [[ $pdam -le 0 ]]; then
-		export pdam=$((1 + RANDOM % $level))
-	fi
-	if [[ $mdam -le 0 ]]; then
-		export mdam=$((1 + RANDOM % $level))
-	fi
-
-}
-
-
-
-battle () {
-	
-	levelcalc
-
-source drawsnear.bash
-source player.bash
-
-echo $"$id draws near..." |log
-
-export	pinit=$(( ((atk + def) / $level) + prng ))
-export	minit=$(( ((ak + de) / $level) + mrng ))
-
-	if [[ $pinit -gt $minit ]]; then
-		export init=1
-	else
-		export init=0
-	fi
-
-while [[ $vit -gt 0 && $vi -gt 0 ]]; do 
-
-damagecalc
-
-if [[ $init -eq 1 ]]; then
-	export vi=$(( vi - pdam ))
-	echo $"$pid does $pdam damage. $id has $vi remaining..." |log
-	if [[ $vi -le 0 ]]; then
-		export after=$(( 1 + RANDOM % $level ))
-		export vit=$(( $after  + vit ))
-		export exp=$(( xp + exp ))
-		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
-		fi
-		echo "$id is dead. $pid gained $xp EXP. Healed $after" |log
-		
-		break
-
-	fi
-	export vit=$(( vit - mdam ))
-	echo $"$id does $mdam damage. $pid has $vit remaining..." |log
-	if [[ $vit -le 0 ]]; then
-		echo "$pid is dead. :GAME OVER:" |log
-		break
-	fi
-		else
-	export vit=$(( vit - mdam ))
-	echo $"$id does $mdam damage. $pid has $vit remaining..." |log
-	if [[ $vi -le 0 ]]; then
-		export after=$(( 1 + RANDOM % $level ))
-		export vit=$(( $after  + vit ))
-		export exp=$(( xp + exp ))
-		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
-		fi
-		echo "$id is dead. $pid gained $xp EXP. Healed $after" |log
-		
-		break
-
-	fi
-	export vi=$(( vi - pdam ))
-	echo $"$pid does $pdam damage. $id has $vi remaining..." |log
-	if [[ $vit -le 0 ]]; then
-		echo "$pid is dead. :GAME OVER:" |log
-		break
-	fi
-	
-fi
-
-done
-
-cat drawsnear.bash >> gamelog.bash
 
 }
 
@@ -220,8 +90,6 @@ sort -Ru level$level.bash | head -1 > enc.bash
 	done < enc.bash
 		
 		source drawsnear.bash
-		cat drawsnear.bash >> gamelog.bash
-		battle
 
 }
 
@@ -242,8 +110,6 @@ sort -Ru level$level.bash | head -1 > enc.bash
 	done < enc.bash
 		
 		source drawsnear.bash
-		cat drawsnear.bash | sed 's/[a-z]/\U&/g' >> gamelog.bash
-		battle
 
 }
 
@@ -283,23 +149,24 @@ move () {
 ##	echo $mov
 
 	if [[ $mov -eq 1 ]]; then
-		echo $'Fateful Encounter...\n' |log
-
 		fatenc
+		echo $'Fateful Encounter...\n'
+		cat drawsnear.bash | sed 's/[a-z]/\U&/g'
 	fi
 	if [[ $mov -eq 20 ]]; then
-		echo $'Nat20! +1 to all stats. Full Heal.' |log
+		echo $'Nat20! +1 to all stats. Full Heal.' 
 		xvit=$(( xvit + 1 ))
 		vit=$xvit
 		def=$(( def + 1 ))
 		atk=$(( atk + 1 ))
 	fi
 	if [[ $mov -ge 2 && $mov -le 10 ]]; then
-		echo $'Encounter...\n' |log
 		enc
+		echo $'Encounter...\n'
+		cat drawsnear.bash
 	fi
 	if [[ $mov -ge 11 && $mov -le 19 ]]; then
-		echo $'Nothing Happens.' |log
+		echo $'Nothing Happens.'
 	fi
 	
 }
@@ -446,22 +313,5 @@ rest () {
 		def=$(( def + 1 ))
 		atk=$(( atk + 1 ))
 	fi
-
-}
-
-
-save () {
-
-	echo "pid=$pid" >> save.bash
-	echo "lvl=$lvl" >> save.bash
-	echo "xvit=$xvit" >> save.bash
-	echo "vit=$vit" >> save.bash
-	echo "atk=$atk" >> save.bash
-	echo "def=$def" >> save.bash
-	echo "exp=$exp" >> save.bash
-
-	cat gamelog.bash > continue.bash
-
-	exit
 
 }
