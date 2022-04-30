@@ -1,5 +1,9 @@
 #!/bin/bash
 
-SEED=$(date +%Y%m%d%I%M%S%N)
+SEED=$(date +%S%N)
+
 echo $SEED > seed.bash
-RANDOM=$(date +%Y%m%d%I%M%S%N)
+
+RANDOM=$SEED
+
+

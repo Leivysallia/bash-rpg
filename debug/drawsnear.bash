@@ -1,5 +1,5 @@
 ID=Ghost
 VI=3
-AK=6
-DE=3
+AK=3
+DE=4
 XP=3
