@@ -2,14 +2,14 @@
 
 makeplayer () {
 
-		echo "PID=Player" >> player
-		echo "LVL=0" >> player
-		echo "VIT=$(( (1 + RANDOM % 6) + (1 + RANDOM % 4) ))" >> player
-		echo "ATK=$(( (1 + RANDOM % 6) + (1 + RANDOM % 4) ))" >> player
-		echo "DEF=$(( (1 + RANDOM % 6) + (1 + RANDOM % 4) ))" >> player
-		echo "EXP=0" >> player
-		export player
-		source player
+		echo "PID=Player" >> player.bash
+		echo "LVL=0" >> player.bash
+		echo "VIT=$(( (1 + RANDOM % 6) + (1 + RANDOM % 4) ))" >> player.bash
+		echo "ATK=$(( (1 + RANDOM % 6) + (1 + RANDOM % 4) ))" >> player.bash
+		echo "DEF=$(( (1 + RANDOM % 6) + (1 + RANDOM % 4) ))" >> player.bash
+		echo "EXP=0" >> player.bash
+		
+		source player.bash
 }
 
 levelcalc () {
@@ -44,17 +44,19 @@ enc () {
 
 levelcalc
 
+rm drawsnear.bash
+
 sort -Ru lvl$level.bash | head -1 > enc.bash
 
 	while read -r name origin base type; do
-		echo "ID=$name" >> $name
-		echo "VI=$(( (1 + RANDOM % $origin) + (1 + RANDOM % $base) + $type ))" >> $name
-		echo "AK=$(( (1 + RANDOM % $origin) + (1 + RANDOM % $base) + $type ))" >> $name
-		echo "DE=$(( (1 + RANDOM % $origin) + (1 + RANDOM % $base) + $type ))" >> $name
-		echo "XP=$(( (1 + RANDOM % $origin) + (1 + RANDOM % $base) + $type ))" >> $name
+		echo "ID=$name" >> drawsnear.bash
+		echo "VI=$(( (1 + RANDOM % $origin) + (1 + RANDOM % $base) + $type ))" >> drawsnear.bash
+		echo "AK=$(( (1 + RANDOM % $origin) + (1 + RANDOM % $base) + $type ))" >> drawsnear.bash
+		echo "DE=$(( (1 + RANDOM % $origin) + (1 + RANDOM % $base) + $type ))" >> drawsnear.bash
+		echo "XP=$(( (1 + RANDOM % $origin) + (1 + RANDOM % $base) + $type ))" >> drawsnear.bash
 	done < enc.bash
-		export $name
-		source $name
+		
+		source drawsnear.bash
 
 }
 

@@ -11,4 +11,8 @@ fi
 cleanstart
 makeplayer
 
-cat player
+cat player.bash
+
+enc
+
+cat drawsnear.bash
