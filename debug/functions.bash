@@ -316,134 +316,134 @@ rest () {
 		d4 heal
 		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi
 	if [[ $rest -eq 3 ]]; then
 		d6 heal
 		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi
 	if [[ $rest -eq 4 ]]; then
 		d10 heal
 		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi
 	if [[ $rest -eq 5 ]]; then
 		d12 heal
 		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi
 	if [[ $rest -eq 6 ]]; then
 		d6 heal
 		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi
 	if [[ $rest -eq 7 ]]; then
 		d10 heal
 		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi
 	if [[ $rest -eq 8 ]]; then
 		d12 heal
 		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi	
 	if [[ $rest -eq 9 ]]; then
 		d6 heal
 		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi
 	if [[ $rest -eq 10 ]]; then
 		d20 heal
 		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi	
 	if [[ $rest -eq 11 ]]; then
 		d10 heal
 		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi
 	if [[ $rest -eq 12 ]]; then
 		d12 heal
 		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi
 	if [[ $rest -eq 13 ]]; then
 		d6 heal
 		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi
 	if [[ $rest -eq 14 ]]; then
 		d10 heal
 		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi
 	if [[ $rest -eq 15 ]]; then
 		d12 heal
 		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi
 	if [[ $rest -eq 16 ]]; then
 		d6 heal
 		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi
 	if [[ $rest -eq 17 ]]; then
 		d10 heal
 		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi
 	if [[ $rest -eq 18 ]]; then
 		d12 heal
 		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi
 	if [[ $rest -eq 19 ]]; then
 		d4 heal
 		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi
 	if [[ $rest -eq 20 ]]; then
 		echo $'Nat20! +1 to all stats. Full Heal.' |log
-		xvit=$(( xvit + 1 ))
-		vit=$xvit
-		def=$(( def + 1 ))
-		atk=$(( atk + 1 ))
+		export xvit=$(( xvit + 1 ))
+		export vit=$xvit
+		export def=$(( def + 1 ))
+		export atk=$(( atk + 1 ))
 	fi
 
 }

@@ -7,3 +7,4 @@ echo $SEED > seed.bash
 RANDOM=$SEED
 
 
+count=0

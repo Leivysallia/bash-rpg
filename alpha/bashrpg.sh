@@ -33,8 +33,12 @@ fi
 
 if [[ $act -eq 2 ]]; then
 
+   if [[ $count -le 3 ]]; then 
    rest
-
+else
+   echo "Too much rest. Time to move..."
+   fi
+   
 fi
 
 

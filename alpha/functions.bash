@@ -108,6 +108,54 @@ levelcalc () {
 
 }
 
+levelup () {
+
+thresh=$(( $level * $level * $level ))
+
+if [[ $exp -ge $thresh ]]; then
+
+	echo $'Level Up. +d4 to all stats. Full Heal.' |log
+
+	export lvl=$(( lvl + 1 ))
+	export exp=$(( exp - thresh ))
+
+	levelcalc
+
+	export xvit=$(( (1 + RANDOM % $level) + $xvit ))
+	export vit=$xvit
+	export atk=$(( (1 + RANDOM % $level) + $atk ))
+	export def=$(( (1 + RANDOM % $level) + $def ))
+
+fi
+
+if [[ $exp -ge $thresh ]]; then
+
+	echo $'Level Up. +d4 to all stats. Full Heal.' |log
+
+	export lvl=$(( lvl + 1 ))
+	export exp=$(( exp - thresh ))
+
+	levelcalc
+
+	export xvit=$(( (1 + RANDOM % $level) + $xvit ))
+	export vit=$xvit
+	export atk=$(( (1 + RANDOM % $level) + $atk ))
+	export def=$(( (1 + RANDOM % $level) + $def ))
+
+fi
+
+cat /dev/null > player.bash
+
+echo "pid=$pid" |tee -a player.bash
+echo "lvl=$lvl" |tee -a player.bash
+echo "vit=$vit" |tee -a player.bash
+echo "xvit=$xvit"
+echo "atk=$atk" |tee -a player.bash
+echo "def=$def" |tee -a player.bash
+echo "exp=$exp" |tee -a player.bash
+
+}
+
 damagecalc () {
 
 levelcalc
@@ -148,7 +196,7 @@ export	minit=$(( ((ak + de) / $level) + mrng ))
 		export init=0
 	fi
 
-while [[ $vit -gt 0 && $vi -gt 0 ]]; do 
+while true; do 
 
 damagecalc
 
@@ -162,8 +210,8 @@ if [[ $init -eq 1 ]]; then
 		if [[ $vit -gt $xvit ]]; then
 			vit=$xvit
 		fi
-		echo "$id is dead. $pid gained $xp EXP. Healed $after" |log
-		
+		echo "$id is dead. $pid gained $xp EXP. Healed $after..." |log
+		levelup
 		break
 
 	fi
@@ -176,6 +224,12 @@ if [[ $init -eq 1 ]]; then
 		else
 	export vit=$(( vit - mdam ))
 	echo $"$id does $mdam damage. $pid has $vit remaining..." |log
+	if [[ $vit -le 0 ]]; then
+		echo "$pid is dead. :GAME OVER:" |log
+		break
+	fi
+	export vi=$(( vi - pdam ))
+	echo $"$pid does $pdam damage. $id has $vi remaining..." |log
 	if [[ $vi -le 0 ]]; then
 		export after=$(( 1 + RANDOM % $level ))
 		export vit=$(( $after  + vit ))
@@ -183,16 +237,10 @@ if [[ $init -eq 1 ]]; then
 		if [[ $vit -gt $xvit ]]; then
 			vit=$xvit
 		fi
-		echo "$id is dead. $pid gained $xp EXP. Healed $after" |log
-		
+		echo "$id is dead. $pid gained $xp EXP. Healed $after..." |log
+		levelup
 		break
 
-	fi
-	export vi=$(( vi - pdam ))
-	echo $"$pid does $pdam damage. $id has $vi remaining..." |log
-	if [[ $vit -le 0 ]]; then
-		echo "$pid is dead. :GAME OVER:" |log
-		break
 	fi
 	
 fi
@@ -279,8 +327,10 @@ export $1=$((1 + RANDOM % 4))
 
 move () {
 
+
+	export	count=$(( count - 1 ))
+
 	d20 mov
-##	echo $mov
 
 	if [[ $mov -eq 1 ]]; then
 		echo $'Fateful Encounter...\n' |log
@@ -306,145 +356,145 @@ move () {
 
 rest () {
 
-	d20 rest
+	export	count=$(( count + 1 ))
 
+	d20 rest
 	if [[ $rest -eq 1 ]]; then
+		echo $'Encounter...\n' |log 
 		enc
-		echo $'Encounter...\n'
-		cat drawsnear.bash
 	fi
 	if [[ $rest -eq 2 ]]; then
 		d4 heal
-		$vit=$(( heal + vit ))
+		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi
 	if [[ $rest -eq 3 ]]; then
 		d6 heal
-		$vit=$(( heal + vit ))
+		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi
 	if [[ $rest -eq 4 ]]; then
 		d10 heal
-		$vit=$(( heal + vit ))
+		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi
 	if [[ $rest -eq 5 ]]; then
 		d12 heal
-		$vit=$(( heal + vit ))
+		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi
 	if [[ $rest -eq 6 ]]; then
 		d6 heal
-		$vit=$(( heal + vit ))
+		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi
 	if [[ $rest -eq 7 ]]; then
 		d10 heal
-		$vit=$(( heal + vit ))
+		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi
 	if [[ $rest -eq 8 ]]; then
 		d12 heal
-		$vit=$(( heal + vit ))
+		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi	
 	if [[ $rest -eq 9 ]]; then
 		d6 heal
-		$vit=$(( heal + vit ))
+		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi
 	if [[ $rest -eq 10 ]]; then
 		d20 heal
-		$vit=$(( heal + vit ))
+		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi	
 	if [[ $rest -eq 11 ]]; then
 		d10 heal
-		$vit=$(( heal + vit ))
+		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi
 	if [[ $rest -eq 12 ]]; then
 		d12 heal
-		$vit=$(( heal + vit ))
+		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi
 	if [[ $rest -eq 13 ]]; then
 		d6 heal
-		$vit=$(( heal + vit ))
+		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi
 	if [[ $rest -eq 14 ]]; then
 		d10 heal
-		$vit=$(( heal + vit ))
+		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi
 	if [[ $rest -eq 15 ]]; then
 		d12 heal
-		$vit=$(( heal + vit ))
+		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi
 	if [[ $rest -eq 16 ]]; then
 		d6 heal
-		$vit=$(( heal + vit ))
+		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi
 	if [[ $rest -eq 17 ]]; then
 		d10 heal
-		$vit=$(( heal + vit ))
+		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi
 	if [[ $rest -eq 18 ]]; then
 		d12 heal
-		$vit=$(( heal + vit ))
+		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi
 	if [[ $rest -eq 19 ]]; then
 		d4 heal
-		$vit=$(( heal + vit ))
+		export vit=$(( heal + vit ))
 		if [[ $vit -gt $xvit ]]; then
-			vit=$xvit
+			export vit=$xvit
 		fi
 	fi
 	if [[ $rest -eq 20 ]]; then
-		echo $'Nat20! +1 to all stats. Full Heal.' 
-		xvit=$(( xvit + 1 ))
-		vit=$xvit
-		def=$(( def + 1 ))
-		atk=$(( atk + 1 ))
+		echo $'Nat20! +1 to all stats. Full Heal.' |log
+		export xvit=$(( xvit + 1 ))
+		export vit=$xvit
+		export def=$(( def + 1 ))
+		export atk=$(( atk + 1 ))
 	fi
 
 }
@@ -465,3 +515,5 @@ save () {
 	exit
 
 }
+
+

@@ -1,5 +1,5 @@
-id=slime
-vi=3
-ak=4
+id=goblin
+vi=6
+ak=6
 de=6
-xp=4
+xp=6
