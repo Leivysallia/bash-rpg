@@ -1,1 +1,0 @@
-Slime:$(( (1 + RANDOM % 4) + (1 + RANDOM % 4) )):$(( (1 + RANDOM % 4) )):$(( (1 + RANDOM % 4) + (1 + RANDOM % 4) )):$(( (1 + RANDOM % 4) )):$(( (1 + RANDOM % 4) + (1 + RANDOM % 4) )):$(( (1 + RANDOM % 4) + (1 + RANDOM % 4) ))

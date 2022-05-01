@@ -1,0 +1,98 @@
+rest () {
+
+export	count=$(( count + 1 ))
+
+	
+	d20 rest
+	if [[ $rest -eq 1 ]]; then
+		echo $'Encounter...\n' |log 
+		enc
+	fi
+	if [[ $rest -eq 2 ]]; then
+
+	fi
+	if [[ $rest -eq 3 ]]; then
+
+	fi
+	if [[ $rest -eq 4 ]]; then
+
+	fi
+	if [[ $rest -eq 5 ]]; then
+
+	fi
+	if [[ $rest -eq 6 ]]; then
+
+	fi
+	if [[ $rest -eq 7 ]]; then
+
+	fi
+	if [[ $rest -eq 8 ]]; then
+
+	fi	
+	if [[ $rest -eq 9 ]]; then
+
+	fi
+	if [[ $rest -eq 10 ]]; then
+
+	fi	
+	if [[ $rest -eq 11 ]]; then
+
+	fi
+	if [[ $rest -eq 12 ]]; then
+
+	fi
+	if [[ $rest -eq 13 ]]; then
+
+	fi
+	if [[ $rest -eq 14 ]]; then
+
+	fi
+	if [[ $rest -eq 15 ]]; then
+
+	fi
+	if [[ $rest -eq 16 ]]; then
+
+	fi
+	if [[ $rest -eq 17 ]]; then
+
+	fi
+	if [[ $rest -eq 18 ]]; then
+
+	fi
+	if [[ $rest -eq 19 ]]; then
+
+	fi
+	if [[ $rest -eq 20 ]]; then
+
+		nat20
+
+	fi
+
+}
+
+refresh () {
+
+	cat /dev/null > player.bash
+
+	echo pid=$pid >> player.bash
+	echo lvl=$lvl >> player.bash
+	echo vit=$vit >> player.bash
+	echo def=$def >> player.bash
+	echo atk=$atk >> player.bash
+	echo exp=$exp >> player.bash
+
+}
+
+nat20 () {
+
+	echo "Nat20!" |log
+	echo "+1 to all stats." |log
+	echo "Full Heal." |log
+	export xvit=$(( xvit + 1 ))
+	export vit=$xvit
+	export def=$(( def + 1 ))
+	export atk=$(( atk + 1 ))
+
+	refresh
+
+}
