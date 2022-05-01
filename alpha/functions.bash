@@ -6,14 +6,11 @@ log () {
 
 }
 
-
-
 newline () {
 
 echo $'\n'
 
 }
-
 
 refresh () {
 
@@ -25,6 +22,8 @@ refresh () {
 	echo def=$def >> player.bash
 	echo atk=$atk >> player.bash
 	echo exp=$exp >> player.bash
+
+	cat player.bash |log
 
 }
 
@@ -104,7 +103,6 @@ fi
 
 
 }
-
 
 levelcalc () {
 
@@ -216,8 +214,6 @@ export	mdam=$(( matk - pdef ))
 	fi
 
 }
-
-
 
 battle () {
 	
