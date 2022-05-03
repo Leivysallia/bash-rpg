@@ -45,7 +45,7 @@ done
 newline
 
 if [[ $act -eq 1 ]]; then
-
+   stamina=$(( stamina - 1 ))
    move
 
 fi
@@ -53,6 +53,7 @@ fi
 if [[ $act -eq 2 ]]; then
 
    if [[ $count -le 3 ]]; then 
+   stamina=$(( stamina - 2 ))
    rest
 else
    echo "Too much rest. Time to move..."
@@ -62,6 +63,7 @@ fi
 
 
 if [[ $act -eq 3 ]]; then
+stamina=$(( stamina - 3 ))
 
    save
 

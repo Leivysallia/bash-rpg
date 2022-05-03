@@ -514,4 +514,15 @@ save () {
 
 }
 
+clean () {
 
+clear
+
+rm drawsnear.bash
+rm enc.bash
+rm seed.bash
+rm player.bash
+rm level*.bash
+rm gamelog.bash
+
+}
