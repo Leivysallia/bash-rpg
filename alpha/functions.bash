@@ -73,25 +73,73 @@ cat /dev/null > enc.bash
 cat /dev/null > seed.bash
 cat /dev/null > player.bash
 
-echo "druin 6 4 4
-scorpion 6 4 4
-droll 6 4 4" > level6.bash
-
-echo "witch 10 6 6
-skeleton 10 6 6
-wolf 10 6 6" > level10.bash
-
-echo "wyrm 20 12 10
-wyvern 20 12 12
-dragon 20 20 20" > level20.bash
-
 echo "slime 4 1 1
 goblin 4 1 1
 ghost 4 1 1" > level4.bash
 
+echo "druin 6 4 4
+scorpion 6 4 4
+droll 6 4 4
+slime 4 4 1
+goblin 4 4 1
+ghost 4 4 1" > level6.bash
+
+echo "witch 10 6 6
+skeleton 10 6 6
+wolf 10 6 6
+slime 4 4 4
+goblin 4 4 4
+ghost 4 4 4
+druin 6 6 4
+scorpion 6 6 4
+droll 6 6 4" > level10.bash
+
 echo "specter 12 10 10 
 wraith 12 10 10
-knight 12 10 10" > level12.bash
+knight 12 10 10
+druin 6 6 6
+scorpion 6 6 6
+droll 6 6 6
+slime 4 4 4
+goblin 4 4 4
+ghost 4 4 4
+witch 10 10 6
+skeleton 10 10 6
+wolf 10 10 6" > level12.bash
+
+echo "wyrm 20 12 10
+wyvern 20 12 12
+dragon 20 20 20
+specter 12 12 10 
+wraith 12 12 10
+knight 12 12 10
+druin 10 6 6
+scorpion 10 6 6
+droll 10 6 6
+slime 6 6 6
+goblin 6 6 6
+ghost 6 6 6
+witch 10 10 10
+skeleton 10 10 10
+wolf 10 10 10" > level20.bash
+
+echo "wyrm 20 12 10
+wyvern 20 12 12
+dragon 20 20 20
+specter 12 12 12 
+wraith 12 12 12
+knight 12 12 12
+druin 10 10 10
+scorpion 10 10 10
+droll 10 10 10
+slime 10 10 10
+goblin 10 10 10
+ghost 10 10 10
+witch 10 10 10
+skeleton 10 10 10
+wolf 10 10 10" > level30.bash
+
+echo "demon 100 100 100" > level50.bash
 
 makeplayer
 
@@ -106,30 +154,68 @@ fi
 
 levelcalc () {
 
+	if [[ $lvl -le 50 ]]; then
+		level=50
+		d20 prng
+		d20 prng2
+		d10 prng3
+		d20 mrng
+		d20 mrng2
+		d10 mrng3
+	fi
+	if [[ $lvl -le 30 ]]; then
+		level=30
+		d20 prng
+	export	prng2=0
+		d10 prng3
+		d20 mrng
+	export	mrng2=0
+		d10 mrng3
+	fi
 	if [[ $lvl -le 20 ]]; then
 		level=20
 		d20 prng
+	export	prng2=0
+	export	prng3=0
 		d20 mrng
+	export	mrng2=0
+	export	mrng3=0
 	fi
 	if [[ $lvl -le 12 ]]; then
 		level=12
-		d12 prng
-		d12 mrng
+		d20 prng
+	export	prng2=0
+	export	prng3=0
+		d20 mrng
+	export	mrng2=0
+	export	mrng3=0
 	fi
 	if [[ $lvl -le 10 ]]; then
 		level=10
-		d10 mrng
-		d10 prng
+		d20 prng
+	export	prng2=0
+	export	prng3=0
+		d20 mrng
+	export	mrng2=0
+	export	mrng3=0
 	fi
 	if [[ $lvl -le 6 ]]; then
 		level=6
-		d6 prng
-		d6 mrng
+		d20 prng
+	export	prng2=0
+	export	prng3=0
+		d20 mrng
+	export	mrng2=0
+	export	mrng3=0
 	fi
 	if [[ $lvl -le 4 ]]; then
 		level=4
-		d4 prng
-		d4 mrng
+		d20 prng
+	export	prng2=0
+	export	prng3=0
+		d20 mrng
+	export	mrng2=0
+	export	mrng3=0
 	fi
 
 }
@@ -185,13 +271,13 @@ fi
 
 cat /dev/null > player.bash
 
-echo "pid=$pid" |tee -a player.bash
-echo "lvl=$lvl" |tee -a player.bash
-echo "vit=$vit" |tee -a player.bash
+echo "pid=$pid" |log player.bash
+echo "lvl=$lvl" |log player.bash
+echo "vit=$vit" |log player.bash
 echo "xvit=$xvit"
-echo "atk=$atk" |tee -a player.bash
-echo "def=$def" |tee -a player.bash
-echo "exp=$exp" |tee -a player.bash
+echo "atk=$atk" |log player.bash
+echo "def=$def" |log player.bash
+echo "exp=$exp" |log player.bash
 
 }
 
@@ -224,8 +310,8 @@ source player.bash
 
 echo $"$id draws near..." |log
 
-export	pinit=$(( ((atk + def) / $level) + prng ))
-export	minit=$(( ((ak + de) / $level) + mrng ))
+export	pinit=$(( ((atk + def) / $level) + (prng + prng2 + prng3) ))
+export	minit=$(( ((ak + de) / $level) + (mrng + mrng2 + mrng3) ))
 
 	if [[ $pinit -gt $minit ]]; then
 		export init=1
