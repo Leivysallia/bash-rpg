@@ -48,7 +48,7 @@ type=4
 
 pid=DEBUG
 
-##	read -r -p $'Player Name\?\n' pid
+	read -r -p $'Player Name\?\n' pid
 		echo "pid=$pid" >> player.bash
 		echo "lvl=0" >> player.bash
 		echo "vit=$(( (1 + RANDOM % $origin) + (1 + RANDOM % $base) + $type ))" >> player.bash
