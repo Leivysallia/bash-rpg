@@ -9,7 +9,6 @@ newline
 
 while [[ $vit -gt 0 ]]; do
 
-echo $'Actions:'
 echo "Stamina=$stamina"
 echo "Day=$day"
 echo $'1. Move'
